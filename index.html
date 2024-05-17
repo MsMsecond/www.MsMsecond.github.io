@@ -1,57 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini Game</title>
+    <title>흑점 날짜 맞추기 게임</title>
     <style>
         body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .image-container {
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
+            flex-wrap: wrap;
         }
-        #game-container {
-            text-align: center;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        #score {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        #click-button {
-            font-size: 18px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: #007bff;
-            color: #fff;
+        .image-container img {
+            margin: 10px;
             cursor: pointer;
+            width: 200px;
+            height: auto;
+            border: 2px solid transparent;
+            transition: border-color 0.3s;
         }
-        #click-button:hover {
-            background-color: #0056b3;
+        .image-container img:hover {
+            border-color: #000;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 1.2em;
         }
     </style>
 </head>
 <body>
-    <div id="game-container">
-        <div id="score">Score: 0</div>
-        <button id="click-button">Click me!</button>
+    <h1>흑점 날짜 맞추기 게임</h1>
+    <p>아래의 흑점 사진 중에서 날짜를 맞춰보세요!</p>
+    <div class="image-container" id="image-container">
+        <img src="image1.jpg" data-date="2024-01-01" alt="흑점 사진 1">
+        <img src="image2.jpg" data-date="2024-02-01" alt="흑점 사진 2">
+        <img src="image3.jpg" data-date="2024-03-01" alt="흑점 사진 3">
+        <img src="image4.jpg" data-date="2024-04-01" alt="흑점 사진 4">
+        <img src="image5.jpg" data-date="2024-05-01" alt="흑점 사진 5">
+        <img src="image6.jpg" data-date="2024-06-01" alt="흑점 사진 6">
     </div>
+    <div id="result"></div>
 
     <script>
-        let score = 0;
-        const scoreDisplay = document.getElementById('score');
-        const clickButton = document.getElementById('click-button');
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('.image-container img');
+            const result = document.getElementById('result');
 
-        clickButton.addEventListener('click', () => {
-            score++;
-            scoreDisplay.textContent = 'Score: ' + score;
+            images.forEach(image => {
+                image.addEventListener('click', function() {
+                    const selectedDate = this.getAttribute('data-date');
+                    result.textContent = `선택한 날짜: ${selectedDate}`;
+                });
+            });
         });
     </script>
 </body>
