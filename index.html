@@ -1,59 +1,67 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>흑점 날짜 맞추기 게임</title>
+    <title>Quiz</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
         }
-        .image-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
+        .quiz-container {
+            margin: 20px auto;
+            max-width: 600px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
         }
-        .image-container img {
-            margin: 10px;
+        .option {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
             cursor: pointer;
-            width: 200px;
-            height: auto;
-            border: 2px solid transparent;
-            transition: border-color 0.3s;
+            transition: background-color 0.3s;
         }
-        .image-container img:hover {
-            border-color: #000;
+        .option:hover {
+            background-color: #f0f0f0;
         }
-        #result {
+        .result {
             margin-top: 20px;
-            font-size: 1.2em;
+            font-size: 24px;
+            color: green;
+            display: none;
         }
     </style>
 </head>
 <body>
-    <h1>흑점 날짜 맞추기 게임</h1>
-    <p>아래의 흑점 사진 중에서 날짜를 맞춰보세요!</p>
-    <div class="image-container" id="image-container">
-        <img src="image1.jpg" data-date="2024-01-01" alt="흑점 사진 1">
-        <img src="image2.jpg" data-date="2024-02-01" alt="흑점 사진 2">
-        <img src="image3.jpg" data-date="2024-03-01" alt="흑점 사진 3">
-        <img src="image4.jpg" data-date="2024-04-01" alt="흑점 사진 4">
-        <img src="image5.jpg" data-date="2024-05-01" alt="흑점 사진 5">
-        <img src="image6.jpg" data-date="2024-06-01" alt="흑점 사진 6">
+    <div class="quiz-container">
+        <h1>Quiz</h1>
+        <img src="your-image-url.jpg" alt="Quiz Image" style="width: 100%; height: auto;">
+        <div class="options">
+            <div class="option" data-answer="1">1. Option 1</div>
+            <div class="option" data-answer="2">2. Option 2</div>
+            <div class="option" data-answer="3">3. Option 3</div>
+            <div class="option" data-answer="4">4. Option 4</div>
+            <div class="option" data-answer="5">5. Option 5</div>
+        </div>
+        <div class="result">O</div>
     </div>
-    <div id="result"></div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const images = document.querySelectorAll('.image-container img');
-            const result = document.getElementById('result');
+        const correctAnswer = 3; // Set the correct answer here
+        const options = document.querySelectorAll('.option');
+        const result = document.querySelector('.result');
 
-            images.forEach(image => {
-                image.addEventListener('click', function() {
-                    const selectedDate = this.getAttribute('data-date');
-                    result.textContent = `선택한 날짜: ${selectedDate}`;
-                });
+        options.forEach(option => {
+            option.addEventListener('click', () => {
+                if (parseInt(option.getAttribute('data-answer')) === correctAnswer) {
+                    result.style.display = 'block';
+                } else {
+                    alert('Wrong answer. Try again!');
+                }
             });
         });
     </script>
